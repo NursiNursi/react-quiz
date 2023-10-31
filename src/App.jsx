@@ -8,6 +8,7 @@ import Question from "./components/Question";
 import Footer from "./components/Footer";
 import NextButton from "./components/NextButton";
 import FinishScreen from "./components/FinishScreen";
+import Progress from "./components/Progress";
 
 const initialState = {
   questions: [],
@@ -88,6 +89,13 @@ function App() {
         )}
         {status === "active" && (
           <>
+            <Progress
+              index={index}
+              numQuestions={numQuestions}
+              points={points}
+              maxPossiblePoints={maxPossiblePoints}
+              answer={answer}
+            />
             <Question
               question={questions[index]}
               dispatch={dispatch}
