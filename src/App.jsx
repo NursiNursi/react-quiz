@@ -11,7 +11,11 @@ import FinishScreen from "./components/FinishScreen";
 import Progress from "./components/Progress";
 import Timer from "./components/Timer";
 
-const SECS_PER_QUESTION = 30;
+const SECT_PER_QUESTION = 30;
+
+const highscoreFromLocalStorage = JSON.parse(
+  localStorage.getItem("highscore") || "0"
+);
 
 const initialState = {
   questions: [],
@@ -19,7 +23,7 @@ const initialState = {
   index: 0,
   answer: null,
   points: 0,
-  highscore: 0,
+  highscore: highscoreFromLocalStorage,
   secondsRemaining: null,
 };
 
@@ -37,7 +41,7 @@ function reducer(state, action) {
       return {
         ...state,
         status: "active",
-        secondsRemaining: state.questions.length * SECS_PER_QUESTION,
+        secondsRemaining: state.questions.length * SECT_PER_QUESTION,
       };
     case "newAnswer": {
       const question = state.questions.at(state.index);
@@ -61,7 +65,13 @@ function reducer(state, action) {
           state.points > state.highscore ? state.points : state.highscore,
       };
     case "restart":
-      return { ...initialState, questions: state.questions, status: "ready" };
+      return {
+        ...initialState,
+        questions: state.questions,
+        status: "ready",
+        highscore: state.highscore,
+        secondsRemaining: state.questions.length * SECT_PER_QUESTION,
+      };
     case "tick":
       return {
         ...state,
@@ -91,6 +101,13 @@ function App() {
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch(() => dispatch({ type: "dataFailed" }));
   }, []);
+
+  useEffect(
+    function () {
+      localStorage.setItem("highscore", JSON.stringify(highscore));
+    },
+    [highscore]
+  );
 
   return (
     <div className="app">
