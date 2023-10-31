@@ -1,19 +1,20 @@
-function Option({ question, answer }) {
-  console.log(question, "from option");
+function Options({ question, dispatch, answer }) {
+  const hasAnswered = answer !== null;
+
   return (
     <div className="options">
       {question.options.map((option, index) => (
         <button
           className={`btn btn-option ${index === answer ? "answer" : ""} ${
-            answer
+            hasAnswered
               ? index === question.correctOption
                 ? "correct"
                 : "wrong"
               : ""
           }`}
-          // className="btn btn-option"
-          disabled={answer}
           key={option}
+          disabled={hasAnswered}
+          onClick={() => dispatch({ type: "newAnswer", payload: index })}
         >
           {option}
         </button>
@@ -22,4 +23,4 @@ function Option({ question, answer }) {
   );
 }
 
-export default Option;
+export default Options;
