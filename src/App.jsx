@@ -20,6 +20,7 @@ const initialState = {
   answer: null,
   points: 0,
   highscore: 0,
+  secondsRemaining: null,
 };
 
 function reducer(state, action) {
@@ -90,8 +91,6 @@ function App() {
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch(() => dispatch({ type: "dataFailed" }));
   }, []);
-
-  console.log(questions);
 
   return (
     <div className="app">
