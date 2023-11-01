@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
+
 :root {
   --color-darkest: #343a40;
   --color-dark: #495057;
@@ -7,8 +9,6 @@
   --color-theme: #1098ad;
   --color-accent: #ffa94d;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Rancho&family=Roboto&display=swap");
 
 * {
   margin: 0;
@@ -42,7 +42,7 @@ body {
 
 .app-header {
   width: 66rem;
-  margin-bottom: 4rem;
+  margin-bottom: 10rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -62,9 +62,8 @@ img {
 }
 
 h1 {
-  font-family: "Roboto", sans-serif;
+  font-family: "Fugaz One", sans-serif;
   font-size: 5.6rem;
-  font-weight: 300;
 }
 
 h2 {
